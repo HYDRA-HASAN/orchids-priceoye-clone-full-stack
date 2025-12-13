@@ -1,6 +1,4 @@
-export default function ProductCarouselBestSeller() {
-  return <BestSellerSection />;
-}
+"use client";
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
@@ -207,4 +205,8 @@ function BestSellerSection() {
       </div>
     </section>
   );
+}
+
+export default function ProductCarouselBestSeller() {
+  return <BestSellerSection />;
 }
