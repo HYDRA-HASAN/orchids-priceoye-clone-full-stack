@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    dangerouslyAllowSVG: true,
   },
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
   typescript: {
