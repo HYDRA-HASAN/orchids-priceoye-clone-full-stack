@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function ProductCarouselTablets() {
   const products = [
     // Column 1
