@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { Smartphone, Headphones, Watch, BatteryMedium } from 'lucide-react';
+
 export default function ShopMoreCategories() {
   const categories = [
     {

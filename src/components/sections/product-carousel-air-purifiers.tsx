@@ -1,3 +1,7 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { Star } from 'lucide-react';
+
 export default function ProductCarouselAirPurifiers() {
   return (
     <section className="bg-[#FF9800] py-12">

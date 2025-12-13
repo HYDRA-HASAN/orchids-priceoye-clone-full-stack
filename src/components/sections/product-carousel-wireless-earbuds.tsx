@@ -1,3 +1,8 @@
+"use client";
+
+import React from 'react';
+import { ChevronLeft, ChevronRight, Star, Truck } from 'lucide-react';
+
 export default function ProductCarouselWirelessEarbuds() {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
