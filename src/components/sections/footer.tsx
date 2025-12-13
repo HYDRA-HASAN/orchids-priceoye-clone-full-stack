@@ -1,8 +1,3 @@
-<file_path>
-src/components/sections/footer.tsx
-</file_path>
-
-<content>
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,10 +18,8 @@ const Footer = () => {
   return (
     <footer className="bg-[#48AFFF] pt-12 pb-6 text-white font-sans border-t border-transparent">
       <div className="container mx-auto px-4 lg:px-6 max-w-[1240px]">
-        {/* Main Footer Links Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           
-          {/* Column 1: Logo & Company Links */}
           <div className="flex flex-col items-start space-y-6">
             <Link href="/" className="mb-2 block">
               <Image 
@@ -47,7 +40,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 2: Customer Service */}
           <div className="flex flex-col items-start space-y-6">
             <h3 className="text-[16px] font-bold mt-2">Customer Service</h3>
             <ul className="space-y-2 text-[14px] leading-6 font-normal">
@@ -59,7 +51,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Secure Payments & App Download */}
           <div className="flex flex-col items-start space-y-6">
             <h3 className="text-[16px] font-bold mt-2">Secure Payments Methods</h3>
             
@@ -74,7 +65,6 @@ const Footer = () => {
             </div>
 
             <div className="mt-4">
-              {/* Google Play Placeholder Button */}
               <Link href="#" className="inline-flex items-center bg-black text-white px-3 py-1.5 rounded-lg border border-white/20 hover:bg-gray-900 transition-colors gap-2 min-w-[150px]">
                  <div className="w-6 h-6 flex items-center justify-center">
                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -91,7 +81,6 @@ const Footer = () => {
 
         </div>
 
-        {/* Footer Bottom: Copyright & Social */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/20">
           <div className="mb-4 md:mb-0">
             <p className="text-[14px] font-normal">Copyright © 2025 Priceoye.pk</p>
@@ -121,4 +110,3 @@ const Footer = () => {
 };
 
 export default Footer;
-</content>

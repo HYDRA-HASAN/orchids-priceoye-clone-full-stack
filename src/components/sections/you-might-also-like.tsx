@@ -1,14 +1,9 @@
-export default function YouMightAlsoLikeSection() {
-  return <YouMightAlsoLike />;
-}
-
 'use client';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Truck, Star } from 'lucide-react';
 
-// Types for our product data
 interface Product {
   id: string;
   name: string;
@@ -31,7 +26,6 @@ const CATEGORIES = [
   'Power Banks',
 ];
 
-// Mock data based on the screenshot (priceoye-21.png)
 const PRODUCTS: Product[] = [
   {
     id: '1',
@@ -147,10 +141,13 @@ const PRODUCTS: Product[] = [
   },
 ];
 
+export default function YouMightAlsoLikeSection() {
+  return <YouMightAlsoLike />;
+}
+
 function YouMightAlsoLike() {
   const [activeTab, setActiveTab] = useState('You Might Also Like');
 
-  // Filter logic (simulated for the "You Might Also Like" tab to show all)
   const filteredProducts = activeTab === 'You Might Also Like' 
     ? PRODUCTS 
     : PRODUCTS.filter(p => p.category === activeTab);
@@ -158,7 +155,6 @@ function YouMightAlsoLike() {
   return (
     <section className="w-full bg-[#F5F5F5] py-8 sm:py-12">
       <div className="container mx-auto px-4 max-w-[1200px]">
-        {/* Navigation Tabs */}
         <div className="mb-6 overflow-x-auto scrollbar-hide">
           <div className="flex items-center gap-6 min-w-max">
             {CATEGORIES.map((category) => (
@@ -177,12 +173,10 @@ function YouMightAlsoLike() {
           </div>
         </div>
 
-        {/* Section Title */}
         <h2 className="text-[#2C3E50] text-2xl md:text-[28px] font-semibold mb-6">
           Recommended Products
         </h2>
 
-        {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -201,7 +195,6 @@ function YouMightAlsoLike() {
 function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group bg-white rounded-lg border border-[#E8E8E8] p-3 flex flex-col relative transition-shadow hover:shadow-lg h-full">
-      {/* Badges */}
       <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
         {product.isFast && (
           <div className="bg-gradient-to-r from-[#F44336] to-[#E91E63] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
@@ -220,7 +213,6 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       )}
 
-      {/* Product Image */}
       <div className="relative w-full aspect-[1/1] mb-3 bg-[#F9F9F9] rounded-md overflow-hidden">
         <Image
           src={product.image}
@@ -231,7 +223,6 @@ function ProductCard({ product }: { product: Product }) {
         />
       </div>
 
-      {/* Reviews */}
       <div className="mb-2">
         {product.rating ? (
           <div className="flex items-center gap-1 bg-[#F5F5F5] rounded-full px-2 py-0.5 w-fit">
@@ -241,17 +232,14 @@ function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
         ) : (
-          // Spacer for alignment if no rating
           <div className="h-[21px]" />
         )}
       </div>
 
-      {/* Product Title */}
       <h3 className="text-[14px] leading-[1.4] font-semibold text-[#2C3E50] mb-2 line-clamp-2 min-h-[40px] group-hover:text-[#1E88E5] transition-colors">
         {product.name}
       </h3>
 
-      {/* Pricing */}
       <div className="mt-auto">
         <div className="text-[18px] font-bold text-[#2C3E50] leading-none mb-1">
           <sup className="text-[12px] font-semibold mr-0.5">Rs</sup>
