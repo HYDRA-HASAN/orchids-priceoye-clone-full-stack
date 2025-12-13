@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight, Truck } from 'lucide-react';
 import Link from 'next/link';
