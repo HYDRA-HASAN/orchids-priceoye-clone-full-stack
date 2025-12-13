@@ -1,3 +1,9 @@
+"use client";
+
+import React from 'react';
+import Image from 'next/image';
+import { Star, Truck } from 'lucide-react';
+
 export default function ProductCarouselSmartWatches() {
   return (
     <section className="w-full bg-[#FF9800] py-8 md:py-12 overflow-hidden font-sans">
