@@ -1,3 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { PartyPopper } from "lucide-react";
+
 export default function SaleCountdown() {
   return (
     <div className="w-full bg-[#1ABC9C] overflow-hidden">
@@ -47,10 +52,6 @@ function BannerContent() {
 }
 
 function CountdownTimer() {
-  // Hardcoded for visual consistency with screenshot design if JS disabled or server-side
-  // In a real app, this would be dynamic.
-  // Using a static layout for the clone to ensure pixel perfection of the layout structure first.
-  
   return (
     <div className="inline-flex items-center justify-center bg-black/10 backdrop-blur-sm px-6 py-1.5 rounded-full text-white text-sm md:text-base font-medium tracking-wide">
       <span className="mr-2 opacity-90">Ending in</span>
@@ -59,11 +60,6 @@ function CountdownTimer() {
   );
 }
 
-"use client";
-import { useState, useEffect } from "react";
-import { PartyPopper } from "lucide-react";
-
-// Client component for the timer logic to avoid hydration mismatch
 function TimerLogic() {
   const [time, setTime] = useState({
     days: 8,
@@ -102,7 +98,6 @@ function TimerLogic() {
     return () => clearInterval(timer);
   }, []);
 
-  // Format with leading zeros
   const format = (num: number) => num.toString().padStart(2, "0");
 
   return (
@@ -113,7 +108,6 @@ function TimerLogic() {
 }
 
 function PartyPopperIcon({ className }: { className?: string }) {
-  // Custom styled icon to mimic the festive elements
   return (
     <div className={className}>
        <PartyPopper strokeWidth={2.5} />
