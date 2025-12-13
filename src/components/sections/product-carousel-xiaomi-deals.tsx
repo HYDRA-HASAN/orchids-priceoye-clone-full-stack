@@ -1,3 +1,9 @@
+"use client";
+
+import React from 'react';
+import Image from 'next/image';
+import { Star, Truck } from 'lucide-react';
+
 export default function ProductCarouselXiaomiDeals() {
   const products = [
     {
