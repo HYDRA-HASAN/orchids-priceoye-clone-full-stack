@@ -1,4 +1,3 @@
-
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = componentTagger;
@@ -380,7 +379,10 @@ function componentTagger(src, map) {
             return done(null, src, map);
         const ast = (0, parser_1.parse)(src, {
             sourceType: 'module',
-            plugins: ['jsx', 'typescript'],
+            plugins: ['jsx', 'typescript', 'importAssertions'],
+            allowAwaitOutsideFunction: true,
+            allowReturnOutsideFunction: true,
+            allowSuperOutsideMethod: true,
         });
         const ms = new magic_string_1.default(src);
         const rel = path.relative(process.cwd(), this.resourcePath);
