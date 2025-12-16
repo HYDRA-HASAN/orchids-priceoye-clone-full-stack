@@ -178,12 +178,21 @@ export default function RecommendedProducts() {
                 </div>
               )}
 
-              {/* Product Image Placeholder */}
-              <div className="w-full aspect-square bg-[#F9F9F9] rounded mb-3 flex items-center justify-center overflow-hidden">
-                <div className="text-gray-300">
-                  {getCategoryIcon(product.category)}
+                {/* Product Image Placeholder */}
+                <div className="w-full aspect-square bg-[#F9F9F9] rounded mb-3 flex items-center justify-center overflow-hidden">
+                  {product.category === 'Mobile' ? (
+                    <img
+                      src={`https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop`}
+                      alt={product.title}
+                      loading="lazy"
+                      className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="text-gray-300">
+                      {getCategoryIcon(product.category)}
+                    </div>
+                  )}
                 </div>
-              </div>
 
               {/* Content */}
               <div className="flex flex-col flex-grow">
