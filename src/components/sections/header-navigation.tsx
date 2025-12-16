@@ -80,23 +80,37 @@ export default function HeaderNavigation() {
             </div>
           </div>
 
-          {/* Right Section: Auth Buttons */}
-          <div className="flex items-center gap-3">
-            <Link 
-              href="/login" 
-              className="hidden md:inline-flex items-center justify-center bg-white text-[#1E88E5] text-[14px] font-semibold px-5 py-1.5 rounded-[4px] hover:shadow-md transition-shadow"
-            >
-              Log in
-            </Link>
-            <Link 
-              href="/register" 
-              className="hidden md:inline-flex items-center justify-center bg-transparent border border-white text-white text-[14px] font-semibold px-5 py-1.5 rounded-[4px] hover:bg-white/10 transition-colors"
-            >
-              Register
-            </Link>
-            
-             {/* Mobile Search Icon Trigger (Optional visual placeholder for mobile if needed, but not specified in strict requirements, keeping clean) */}
-          </div>
+            {/* Right Section: Auth Buttons */}
+            <div className="flex items-center gap-3">
+              {user ? (
+                <div className="hidden md:flex items-center gap-3">
+                  <span className="text-white text-sm">
+                    {user.user_metadata?.full_name || user.email}
+                  </span>
+                  <button
+                    onClick={signOut}
+                    className="inline-flex items-center justify-center bg-white text-[#1E88E5] text-[14px] font-semibold px-5 py-1.5 rounded-[4px] hover:shadow-md transition-shadow"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <Link 
+                    href="/login" 
+                    className="hidden md:inline-flex items-center justify-center bg-white text-[#1E88E5] text-[14px] font-semibold px-5 py-1.5 rounded-[4px] hover:shadow-md transition-shadow"
+                  >
+                    Log in
+                  </Link>
+                  <Link 
+                    href="/register" 
+                    className="hidden md:inline-flex items-center justify-center bg-transparent border border-white text-white text-[14px] font-semibold px-5 py-1.5 rounded-[4px] hover:bg-white/10 transition-colors"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </div>
         </div>
       </header>
 
