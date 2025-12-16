@@ -104,7 +104,7 @@ export const products: Product[] = [
     name: 'Apple AirPods Pro 2',
     price: 49999,
     originalPrice: 54999,
-    image: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=500',
     category: 'Earbuds',
     specs: ['Active Noise Cancellation', 'Spatial Audio', 'MagSafe Charging', '30h Battery']
   },
@@ -113,7 +113,7 @@ export const products: Product[] = [
     name: 'Samsung Galaxy Buds3 Pro',
     price: 39999,
     originalPrice: 44999,
-    image: 'https://images.unsplash.com/photo-1590658165737-15a047b7a0da?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1590658165737-15a047b7a0da?w=500',
     category: 'Earbuds',
     specs: ['ANC', '360 Audio', 'Wireless Charging', '28h Battery']
   },
@@ -122,7 +122,7 @@ export const products: Product[] = [
     name: 'Apple Watch Series 9',
     price: 139999,
     originalPrice: 159999,
-    image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500',
     category: 'Smart Watch',
     specs: ['Always-On Display', 'S9 Chip', 'Blood Oxygen', '18h Battery']
   },
@@ -131,7 +131,7 @@ export const products: Product[] = [
     name: 'Samsung Galaxy Watch6 Classic',
     price: 89999,
     originalPrice: 99999,
-    image: 'https://images.unsplash.com/photo-1617043786394-f977fa12eddf?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1617043786394-f977fa12eddf?w=500',
     category: 'Smart Watch',
     specs: ['AMOLED Display', 'Rotating Bezel', 'Health Tracking', '40h Battery']
   },
@@ -140,7 +140,7 @@ export const products: Product[] = [
     name: 'MacBook Pro 14" M3',
     price: 449999,
     originalPrice: 489999,
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500',
     category: 'Laptop',
     specs: ['14" Liquid Retina XDR', 'M3 Chip', '16GB RAM', '512GB SSD']
   },
@@ -149,7 +149,7 @@ export const products: Product[] = [
     name: 'Dell XPS 15',
     price: 319999,
     originalPrice: 359999,
-    image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500',
     category: 'Laptop',
     specs: ['15.6" OLED', 'Intel i7-13700H', '16GB RAM', '1TB SSD']
   }
