@@ -555,7 +555,6 @@ export default function CheckoutPage() {
                   }}
                 >
                   <CheckoutForm
-                    selectedMethod={selectedMethod}
                     amount={amount}
                     onSuccess={handleSuccess}
                     onError={handleError}
