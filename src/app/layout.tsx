@@ -2,6 +2,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 import Script from 'next/script';
 import { AuthProvider } from '@/lib/auth-context';
+import { CartProvider } from '@/lib/cart-context';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           data-orchids-project-id="9ca3df42-fbd7-4e8d-9d55-305933189c05"
         />
         <AuthProvider>
-          {children}
+          <CartProvider>
+            {children}
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
