@@ -59,19 +59,21 @@ const ProductCard = ({
           </h4>
         </Link>
 
-        <Link href={`/product/${id}`} className={cn(
-          "relative w-full flex-1 flex items-center justify-center mb-4 bg-gray-50/50 rounded-md overflow-hidden block",
-          imageAspect
-        )}>
-          <div className="w-full h-full flex items-center justify-center text-gray-300">
-             <Image 
-                src={image} 
-                alt={name}
-                fill
-                className="object-contain p-4 mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
-             />
-          </div>
-        </Link>
+          <Link href={`/product/${id}`} className={cn(
+            "relative w-full flex-1 flex items-center justify-center mb-4 bg-gray-50/50 rounded-md overflow-hidden block",
+            imageAspect
+          )}>
+            <div className="w-full h-full flex items-center justify-center text-gray-300">
+               <Image 
+                  src={image} 
+                  alt={name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  loading="lazy"
+                  className="object-contain p-4 mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
+               />
+            </div>
+          </Link>
 
         <div className="mt-auto space-y-2">
           <div className="flex items-center gap-1">
