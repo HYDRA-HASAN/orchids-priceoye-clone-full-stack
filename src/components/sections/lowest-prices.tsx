@@ -148,14 +148,24 @@ export default function LowestPricesSection() {
                     </div>
                  </div>
 
-                {/* Product Image */}
-                <div className="relative w-full h-[140px] sm:h-[180px] mb-3 flex items-center justify-center bg-[#F9F9F9] rounded-[4px] overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                  {/* Product Image */}
+                  <div className="relative w-full h-[140px] sm:h-[180px] mb-3 flex items-center justify-center bg-[#F9F9F9] rounded-[4px] overflow-hidden">
+                    {product.type === 'phone' ? (
+                      <img
+                        src={`https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop`}
+                        alt={product.title}
+                        loading="lazy"
+                        className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        loading="lazy"
+                        className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
+                  </div>
 
                 {/* Rating - Only visible if we assume standard card or if requested, often hidden on compact views but visible in screenshot */}
                 <div className="flex items-center gap-1 mb-1.5">
