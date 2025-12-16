@@ -214,58 +214,96 @@ function CheckoutForm({
           </motion.div>
         )}
 
-        {selectedMethod === 'bank_transfer' && (
-          <motion.div
-            key="bank"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-          >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bank Transfer Details</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Select Bank
-                </label>
-                <select
-                  value={selectedBank}
-                  onChange={(e) => setSelectedBank(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
-                >
-                  <option value="">Choose your bank</option>
-                  {banks.map((bank) => (
-                    <option key={bank} value={bank}>{bank}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Account Number (Optional)
-                </label>
-                <input
-                  type="text"
-                  value={accountNumber}
-                  onChange={(e) => setAccountNumber(e.target.value)}
-                  placeholder="Enter your account number"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
-                />
-              </div>
-              <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                <p className="text-sm text-gray-600">
-                  Transfer the amount to the following account and upload the receipt.
-                </p>
-                <div className="mt-3 space-y-1 text-sm">
-                  <p><span className="font-medium">Bank:</span> HBL</p>
-                  <p><span className="font-medium">Account Title:</span> Pakistan Store</p>
-                  <p><span className="font-medium">Account No:</span> 1234-5678-9012-3456</p>
-                  <p><span className="font-medium">IBAN:</span> PK12HABB1234567890123456</p>
+          {selectedMethod === 'bank_transfer' && (
+            <motion.div
+              key="bank"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Bank Transfer Details</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Bank
+                  </label>
+                  <select
+                    value={selectedBank}
+                    onChange={(e) => setSelectedBank(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                  >
+                    <option value="">Choose your bank</option>
+                    {banks.map((bank) => (
+                      <option key={bank} value={bank}>{bank}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Account Number (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={accountNumber}
+                    onChange={(e) => setAccountNumber(e.target.value)}
+                    placeholder="Enter your account number"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                  />
+                </div>
+                <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                  <p className="text-sm text-gray-600">
+                    Transfer the amount to the following account and upload the receipt.
+                  </p>
+                  <div className="mt-3 space-y-1 text-sm">
+                    <p><span className="font-medium">Bank:</span> HBL</p>
+                    <p><span className="font-medium">Account Title:</span> Pakistan Store</p>
+                    <p><span className="font-medium">Account No:</span> 1234-5678-9012-3456</p>
+                    <p><span className="font-medium">IBAN:</span> PK12HABB1234567890123456</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+
+          {selectedMethod === 'cod' && (
+            <motion.div
+              key="cod"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Cash on Delivery</h3>
+              <div className="space-y-4">
+                <div className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
+                  <div className="flex items-start gap-3">
+                    <span className="text-3xl">💵</span>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Pay with cash when you receive</h4>
+                      <ul className="text-sm text-gray-600 space-y-1">
+                        <li>• No advance payment required</li>
+                        <li>• Inspect the product before paying</li>
+                        <li>• Pay in cash to the delivery person</li>
+                        <li>• Available for all areas in Pakistan</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-amber-50 border border-amber-200">
+                  <div className="flex items-start gap-2">
+                    <svg className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-sm text-amber-800">
+                      Please keep the exact amount ready. Our delivery partner may not carry change.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       <motion.button
         type="submit"
