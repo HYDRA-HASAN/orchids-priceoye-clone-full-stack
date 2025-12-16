@@ -60,12 +60,10 @@ const paymentMethods: PaymentMethod[] = [
 ];
 
 function CheckoutForm({ 
-  selectedMethod, 
   amount, 
   onSuccess, 
   onError 
 }: { 
-  selectedMethod: PaymentMethodType;
   amount: number;
   onSuccess: () => void;
   onError: (msg: string) => void;
@@ -73,13 +71,9 @@ function CheckoutForm({
   const stripe = useStripe();
   const elements = useElements();
   const [processing, setProcessing] = useState(false);
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [accountNumber, setAccountNumber] = useState('');
-  const [selectedBank, setSelectedBank] = useState('');
 
-  const banks = ['HBL', 'MCB', 'UBL', 'Allied Bank', 'Bank Alfalah', 'Meezan Bank'];
-
-  const handleCardPayment = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!stripe || !elements) return;
     
     setProcessing(true);
@@ -102,82 +96,80 @@ function CheckoutForm({
     }
   };
 
-  const handleMobileWalletPayment = async () => {
-    if (!mobileNumber || mobileNumber.length < 11) {
-      onError('Please enter a valid mobile number');
-      return;
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Card Details</h3>
+        <div className="max-h-[400px] overflow-y-auto">
+          <PaymentElement options={{ layout: 'tabs' }} />
+        </div>
+      </div>
+
+      <motion.button
+        type="submit"
+        disabled={processing || !stripe || !elements}
+        className="w-full py-4 px-6 bg-[#1E88E5] text-white font-bold text-lg rounded-xl shadow-lg hover:bg-[#1565C0] hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        whileHover={{ scale: processing ? 1 : 1.02 }}
+        whileTap={{ scale: processing ? 1 : 0.98 }}
+      >
+        {processing ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            Processing...
+          </span>
+        ) : (
+          `Pay Rs ${amount.toLocaleString()}`
+        )}
+      </motion.button>
+    </form>
+  );
+}
+
+function ManualPaymentForm({ 
+  selectedMethod, 
+  amount, 
+  onSuccess, 
+  onError 
+}: { 
+  selectedMethod: PaymentMethodType;
+  amount: number;
+  onSuccess: () => void;
+  onError: (msg: string) => void;
+}) {
+  const [processing, setProcessing] = useState(false);
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
+  const [selectedBank, setSelectedBank] = useState('');
+
+  const banks = ['HBL', 'MCB', 'UBL', 'Allied Bank', 'Bank Alfalah', 'Meezan Bank'];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (selectedMethod === 'easypaisa' || selectedMethod === 'jazzcash') {
+      if (!mobileNumber || mobileNumber.length < 11) {
+        onError('Please enter a valid mobile number');
+        return;
+      }
     }
     
-    setProcessing(true);
-    
-    setTimeout(() => {
-      onSuccess();
-    }, 2000);
-  };
-
-  const handleBankTransfer = async () => {
-    if (!selectedBank) {
+    if (selectedMethod === 'bank_transfer' && !selectedBank) {
       onError('Please select a bank');
       return;
     }
     
     setProcessing(true);
-    
     setTimeout(() => {
       onSuccess();
-    }, 2000);
+    }, 1500);
   };
-
-    const handleCOD = async () => {
-      setProcessing(true);
-      
-      setTimeout(() => {
-        onSuccess();
-      }, 1500);
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      
-      switch (selectedMethod) {
-        case 'card':
-          await handleCardPayment();
-          break;
-        case 'easypaisa':
-        case 'jazzcash':
-          await handleMobileWalletPayment();
-          break;
-        case 'bank_transfer':
-          await handleBankTransfer();
-          break;
-        case 'cod':
-          await handleCOD();
-          break;
-      }
-    };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <AnimatePresence mode="wait">
-        {selectedMethod === 'card' && (
-          <motion.div
-            key="card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-          >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Card Details</h3>
-            <div className="max-h-[400px] overflow-y-auto">
-              <PaymentElement 
-                options={{
-                  layout: 'tabs',
-                }}
-              />
-            </div>
-          </motion.div>
-        )}
-
         {(selectedMethod === 'easypaisa' || selectedMethod === 'jazzcash') && (
           <motion.div
             key="mobile"
@@ -214,118 +206,118 @@ function CheckoutForm({
           </motion.div>
         )}
 
-          {selectedMethod === 'bank_transfer' && (
-            <motion.div
-              key="bank"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Bank Transfer Details</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Select Bank
-                  </label>
-                  <select
-                    value={selectedBank}
-                    onChange={(e) => setSelectedBank(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
-                  >
-                    <option value="">Choose your bank</option>
-                    {banks.map((bank) => (
-                      <option key={bank} value={bank}>{bank}</option>
-                    ))}
-                  </select>
+        {selectedMethod === 'bank_transfer' && (
+          <motion.div
+            key="bank"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+          >
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bank Transfer Details</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Select Bank
+                </label>
+                <select
+                  value={selectedBank}
+                  onChange={(e) => setSelectedBank(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                >
+                  <option value="">Choose your bank</option>
+                  {banks.map((bank) => (
+                    <option key={bank} value={bank}>{bank}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Account Number (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={accountNumber}
+                  onChange={(e) => setAccountNumber(e.target.value)}
+                  placeholder="Enter your account number"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                />
+              </div>
+              <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                <p className="text-sm text-gray-600">
+                  Transfer the amount to the following account and upload the receipt.
+                </p>
+                <div className="mt-3 space-y-1 text-sm">
+                  <p><span className="font-medium">Bank:</span> HBL</p>
+                  <p><span className="font-medium">Account Title:</span> Pakistan Store</p>
+                  <p><span className="font-medium">Account No:</span> 1234-5678-9012-3456</p>
+                  <p><span className="font-medium">IBAN:</span> PK12HABB1234567890123456</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Account Number (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={accountNumber}
-                    onChange={(e) => setAccountNumber(e.target.value)}
-                    placeholder="Enter your account number"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
-                  />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {selectedMethod === 'cod' && (
+          <motion.div
+            key="cod"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+          >
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Cash on Delivery</h3>
+            <div className="space-y-4">
+              <div className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
+                <div className="flex items-start gap-3">
+                  <span className="text-3xl">💵</span>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Pay with cash when you receive</h4>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• No advance payment required</li>
+                      <li>• Inspect the product before paying</li>
+                      <li>• Pay in cash to the delivery person</li>
+                      <li>• Available for all areas in Pakistan</li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                  <p className="text-sm text-gray-600">
-                    Transfer the amount to the following account and upload the receipt.
+              </div>
+              <div className="p-4 rounded-lg bg-amber-50 border border-amber-200">
+                <div className="flex items-start gap-2">
+                  <svg className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-sm text-amber-800">
+                    Please keep the exact amount ready. Our delivery partner may not carry change.
                   </p>
-                  <div className="mt-3 space-y-1 text-sm">
-                    <p><span className="font-medium">Bank:</span> HBL</p>
-                    <p><span className="font-medium">Account Title:</span> Pakistan Store</p>
-                    <p><span className="font-medium">Account No:</span> 1234-5678-9012-3456</p>
-                    <p><span className="font-medium">IBAN:</span> PK12HABB1234567890123456</p>
-                  </div>
                 </div>
               </div>
-            </motion.div>
-          )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          {selectedMethod === 'cod' && (
-            <motion.div
-              key="cod"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Cash on Delivery</h3>
-              <div className="space-y-4">
-                <div className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
-                  <div className="flex items-start gap-3">
-                    <span className="text-3xl">💵</span>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Pay with cash when you receive</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        <li>• No advance payment required</li>
-                        <li>• Inspect the product before paying</li>
-                        <li>• Pay in cash to the delivery person</li>
-                        <li>• Available for all areas in Pakistan</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 rounded-lg bg-amber-50 border border-amber-200">
-                  <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-sm text-amber-800">
-                      Please keep the exact amount ready. Our delivery partner may not carry change.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <motion.button
-          type="submit"
-          disabled={processing || (selectedMethod === 'card' && (!stripe || !elements))}
-          className="w-full py-4 px-6 bg-[#1E88E5] text-white font-bold text-lg rounded-xl shadow-lg hover:bg-[#1565C0] hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          whileHover={{ scale: processing ? 1 : 1.02 }}
-          whileTap={{ scale: processing ? 1 : 0.98 }}
-        >
-          {processing ? (
-            <span className="flex items-center justify-center gap-2">
-              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              Processing...
-            </span>
-          ) : selectedMethod === 'cod' ? (
-            `Place Order - Rs ${amount.toLocaleString()}`
-          ) : (
-            `Pay Rs ${amount.toLocaleString()}`
-          )}
-        </motion.button>
+      <motion.button
+        type="submit"
+        disabled={processing}
+        className="w-full py-4 px-6 bg-[#1E88E5] text-white font-bold text-lg rounded-xl shadow-lg hover:bg-[#1565C0] hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        whileHover={{ scale: processing ? 1 : 1.02 }}
+        whileTap={{ scale: processing ? 1 : 0.98 }}
+      >
+        {processing ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            Processing...
+          </span>
+        ) : selectedMethod === 'cod' ? (
+          `Place Order - Rs ${amount.toLocaleString()}`
+        ) : (
+          `Pay Rs ${amount.toLocaleString()}`
+        )}
+      </motion.button>
     </form>
   );
 }
