@@ -7,65 +7,9 @@ import { cn } from "@/lib/utils";
 import { products } from "@/lib/products-data";
 import { useCart } from "@/lib/cart-context";
 
-// Mock Data for the Best Seller Section
-const FEATURED_PRODUCT = {
-  id: "featured-1",
-  title: "Tecno spark 40",
-  currentPrice: "30,999",
-  oldPrice: "33,999",
-  discount: "9% OFF",
-  rating: "4.8",
-  reviews: "23 Reviews",
-  badgeLabels: ["12.12", "SALE"],
-  imageUrl: "https://placehold.co/400x500/transparent/2C3E50/png?text=Spark+40",
-};
-
-const GRID_PRODUCTS = [
-  {
-    id: "gp-1",
-    title: "Realme Note 70",
-    currentPrice: "26,999",
-    oldPrice: "29,999",
-    discount: "10% OFF",
-    rating: "5.0",
-    reviews: "8 Reviews",
-    badgeLabels: ["12.12", "SALE"],
-    imageUrl: "https://placehold.co/200x250/transparent/2C3E50/png?text=Realme+Note+70",
-  },
-  {
-    id: "gp-2",
-    title: "Samsung Galaxy A07",
-    currentPrice: "23,999",
-    oldPrice: "27,999",
-    discount: "15% OFF",
-    rating: "4.8",
-    reviews: "52 Reviews",
-    badgeLabels: ["12.12", "SALE"],
-    imageUrl: "https://placehold.co/200x250/transparent/2C3E50/png?text=Samsung+A07",
-  },
-  {
-    id: "gp-3",
-    title: "Infinix Hot 60 Pro",
-    currentPrice: "43,499",
-    oldPrice: "47,999",
-    discount: "9% OFF",
-    rating: "4.5",
-    reviews: "25 Reviews",
-    badgeLabels: ["12.12", "SALE"],
-    imageUrl: "https://placehold.co/200x250/transparent/2C3E50/png?text=Infinix+Hot+60",
-  },
-  {
-    id: "gp-4",
-    title: "Xiaomi Redmi A5",
-    currentPrice: "19,999",
-    oldPrice: "22,999",
-    discount: "13% OFF",
-    rating: "4.9",
-    reviews: "62 Reviews",
-    badgeLabels: ["12.12", "SALE"],
-    imageUrl: "https://placehold.co/200x250/transparent/2C3E50/png?text=Redmi+A5",
-  },
-];
+const mobileProducts = products.filter(p => p.category === 'Mobile');
+const FEATURED_PRODUCT = mobileProducts[0];
+const GRID_PRODUCTS = mobileProducts.slice(1, 5);
 
 interface ProductCardProps {
   id: string;
@@ -100,70 +44,70 @@ const ProductCard = ({
           className
         )}
       >
-        {/* Sale Badge */}
-        {badgeLabels && (
+        {discount > 0 && (
           <div className="absolute top-0 right-0 z-10 flex flex-col">
             <div className="bg-[#E91E63] text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg shadow-sm leading-tight text-center min-w-[40px]">
-              <div className="text-[11px]">{badgeLabels[0]}</div>
-              <div className="text-[9px] uppercase">{badgeLabels[1]}</div>
+              <div className="text-[11px]">{discount}%</div>
+              <div className="text-[9px] uppercase">OFF</div>
             </div>
           </div>
         )}
 
-        {/* Product Title */}
-        <h4 className="text-[14px] font-semibold text-[#2C3E50] mb-2 z-10 line-clamp-2 leading-[1.4] group-hover:text-[#1E88E5] transition-colors">
-          {title}
-        </h4>
+        <Link href={`/product/${id}`}>
+          <h4 className="text-[14px] font-semibold text-[#2C3E50] mb-2 z-10 line-clamp-2 leading-[1.4] group-hover:text-[#1E88E5] transition-colors">
+            {name}
+          </h4>
+        </Link>
 
-        {/* Product Image */}
-        <div
-          className={cn(
-            "relative w-full flex-1 flex items-center justify-center mb-4 bg-gray-50/50 rounded-md overflow-hidden",
-            imageAspect
-          )}
-        >
-          {/* Placeholder Fallback using generic div since assets are limited */}
+        <Link href={`/product/${id}`} className={cn(
+          "relative w-full flex-1 flex items-center justify-center mb-4 bg-gray-50/50 rounded-md overflow-hidden block",
+          imageAspect
+        )}>
           <div className="w-full h-full flex items-center justify-center text-gray-300">
              <Image 
-                src={imageUrl} 
-                alt={title}
+                src={image} 
+                alt={name}
                 fill
                 className="object-contain p-4 mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
              />
           </div>
-        </div>
+        </Link>
 
-        {/* Product Details (Rating & Price) */}
-        <div className="mt-auto">
-          {/* Rating */}
-          <div className="flex items-center gap-1 mb-2">
+        <div className="mt-auto space-y-2">
+          <div className="flex items-center gap-1">
             <Star className="w-3 h-3 text-[#FFC107] fill-[#FFC107]" />
-            <span className="text-[12px] font-semibold text-[#2C3E50]">{rating}</span>
-            <span className="text-[12px] text-[#999999] font-normal">{reviews}</span>
+            <span className="text-[12px] font-semibold text-[#2C3E50]">4.5</span>
+            <span className="text-[12px] text-[#999999] font-normal">(24 Reviews)</span>
           </div>
 
-          {/* Pricing */}
           <div className="flex items-end justify-between w-full">
             <div className="flex flex-col">
               <span className="text-[18px] font-bold text-[#2C3E50] leading-none mb-1">
                 <span className="text-[12px] align-top mr-0.5">Rs</span>
-                {currentPrice}
+                {price.toLocaleString()}
               </span>
-              <span className="text-[12px] text-[#999999] line-through font-normal">
-                <span className="text-[10px] align-top mr-0.5">Rs</span>
-                {oldPrice}
-              </span>
-            </div>
-            
-            <div className="bg-green-50 px-2 py-0.5 rounded text-right">
-               <span className="text-[12px] font-semibold text-[#4CAF50] block">
-                 {discount}
-               </span>
+              {originalPrice && (
+                <span className="text-[12px] text-[#999999] line-through font-normal">
+                  <span className="text-[10px] align-top mr-0.5">Rs</span>
+                  {originalPrice.toLocaleString()}
+                </span>
+              )}
             </div>
           </div>
+
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              onAddToCart();
+            }}
+            className="w-full bg-[#1E88E5] text-white py-2 rounded-md hover:bg-[#1565C0] transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Add to Cart
+          </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
