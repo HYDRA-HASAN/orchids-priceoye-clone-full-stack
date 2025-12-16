@@ -230,14 +230,7 @@ export default function HeaderNavigation() {
       </aside>
     </>
   );
-}"use client";
-
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import { Package, MessageSquareWarning, User, Bell, LogOut, X, ChevronRight, Menu, ShoppingCart } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
-import { useCart } from "@/lib/cart-context";
+}
 
 export default function HeaderNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
