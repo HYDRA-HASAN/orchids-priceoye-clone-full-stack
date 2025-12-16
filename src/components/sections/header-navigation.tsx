@@ -4,12 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Package, MessageSquareWarning, User, Bell, LogOut, X, ChevronRight, Menu } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 export default function HeaderNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    toggleSidebar();
   };
 
   return (
