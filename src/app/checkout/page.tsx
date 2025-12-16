@@ -128,22 +128,33 @@ function CheckoutForm({
     }, 2000);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    switch (selectedMethod) {
-      case 'card':
-        await handleCardPayment();
-        break;
-      case 'easypaisa':
-      case 'jazzcash':
-        await handleMobileWalletPayment();
-        break;
-      case 'bank_transfer':
-        await handleBankTransfer();
-        break;
-    }
-  };
+    const handleCOD = async () => {
+      setProcessing(true);
+      
+      setTimeout(() => {
+        onSuccess();
+      }, 1500);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      
+      switch (selectedMethod) {
+        case 'card':
+          await handleCardPayment();
+          break;
+        case 'easypaisa':
+        case 'jazzcash':
+          await handleMobileWalletPayment();
+          break;
+        case 'bank_transfer':
+          await handleBankTransfer();
+          break;
+        case 'cod':
+          await handleCOD();
+          break;
+      }
+    };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
