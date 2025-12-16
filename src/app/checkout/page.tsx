@@ -11,7 +11,7 @@ import HeaderNavigation from '@/components/sections/header-navigation';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-type PaymentMethodType = 'card' | 'easypaisa' | 'jazzcash' | 'bank_transfer';
+type PaymentMethodType = 'card' | 'easypaisa' | 'jazzcash' | 'bank_transfer' | 'cod';
 
 interface PaymentMethod {
   id: PaymentMethodType;
@@ -48,6 +48,13 @@ const paymentMethods: PaymentMethod[] = [
     name: 'Bank Transfer',
     icon: '🏦',
     description: 'Direct bank transfer (HBL, MCB, UBL)',
+    available: true,
+  },
+  {
+    id: 'cod',
+    name: 'Cash on Delivery',
+    icon: '💵',
+    description: 'Pay when you receive your order',
     available: true,
   },
 ];
