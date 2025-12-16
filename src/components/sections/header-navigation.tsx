@@ -56,34 +56,42 @@ export default function HeaderNavigation() {
             </Link>
           </div>
 
-          {/* Center Section: Search Bar (Desktop Only as per common responsive patterns for this layout) */}
-          <div className="hidden md:flex flex-grow max-w-[600px] mx-8">
-            <div className="relative w-full">
-              <form className="w-full">
-                <input 
-                  type="text" 
-                  placeholder="Search..." 
-                  className="w-full h-10 px-4 pr-10 rounded-[4px] border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300 text-sm text-[#2C3E50] placeholder-[#999999]"
-                />
-                <button 
-                  type="button" 
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Voice Search"
-                >
-                  <Image 
-                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/9ca3df42-fbd7-4e8d-9d55-305933189c05-priceoye-pk/assets/svgs/mic-blue-3.svg" 
-                    alt="voice search" 
-                    width={18} 
-                    height={23} 
-                    className="w-[14px] h-[18px]"
+            {/* Center Section: Search Bar (Desktop Only as per common responsive patterns for this layout) */}
+            <div className="hidden md:flex flex-grow max-w-[600px] mx-8">
+              <div className="relative w-full">
+                <form className="w-full">
+                  <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    className="w-full h-10 px-4 pr-10 rounded-[4px] border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white text-sm text-gray-800 placeholder-gray-500"
                   />
-                </button>
-              </form>
+                  <button 
+                    type="button" 
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full transition-colors"
+                    aria-label="Voice Search"
+                  >
+                    <Image 
+                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/9ca3df42-fbd7-4e8d-9d55-305933189c05-priceoye-pk/assets/svgs/mic-blue-3.svg" 
+                      alt="voice search" 
+                      width={18} 
+                      height={23} 
+                      className="w-[14px] h-[18px]"
+                    />
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
 
-            {/* Right Section: Auth Buttons */}
-            <div className="flex items-center gap-3">
+              {/* Right Section: Cart & Auth Buttons */}
+              <div className="flex items-center gap-3">
+                <Link href="/cart" className="relative p-2 hover:bg-white/10 rounded-full transition-colors">
+                  <ShoppingCart className="w-6 h-6 text-white" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </Link>
               {user ? (
                 <div className="hidden md:flex items-center gap-3">
                   <span className="text-white text-sm">
