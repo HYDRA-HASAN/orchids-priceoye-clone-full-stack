@@ -147,20 +147,28 @@ export default function HeaderNavigation() {
                     </button>
                 </div>
                 
-                <div className="flex gap-3">
-                    <Link 
-                        href="/login"
-                        className="flex-1 bg-[#1E88E5] text-white text-center py-2 rounded-[4px] text-sm font-semibold"
-                    >
-                        Login
-                    </Link>
-                    <Link 
-                        href="/register"
-                        className="flex-1 bg-white border border-[#1E88E5] text-[#1E88E5] text-center py-2 rounded-[4px] text-sm font-semibold"
-                    >
-                        Register
-                    </Link>
-                </div>
+                  {user ? (
+                    <div className="flex flex-col gap-2">
+                      <p className="text-sm text-gray-700">
+                        Welcome, <span className="font-semibold">{user.user_metadata?.full_name || user.email}</span>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex gap-3">
+                        <Link 
+                            href="/login"
+                            className="flex-1 bg-[#1E88E5] text-white text-center py-2 rounded-[4px] text-sm font-semibold"
+                        >
+                            Login
+                        </Link>
+                        <Link 
+                            href="/register"
+                            className="flex-1 bg-white border border-[#1E88E5] text-[#1E88E5] text-center py-2 rounded-[4px] text-sm font-semibold"
+                        >
+                            Register
+                        </Link>
+                    </div>
+                  )}
             </div>
 
             {/* Sidebar Menu Items */}
