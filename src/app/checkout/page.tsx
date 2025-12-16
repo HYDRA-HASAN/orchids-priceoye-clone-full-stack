@@ -336,8 +336,12 @@ export default function CheckoutPage() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isManualPayment, setIsManualPayment] = useState(false);
 
   const amount = Math.round(totalPrice);
+
+  // Manual payment methods that don't need Stripe Payment Element
+  const manualPaymentMethods: PaymentMethodType[] = ['easypaisa', 'jazzcash', 'bank_transfer', 'cod'];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -352,6 +356,15 @@ export default function CheckoutPage() {
       return;
     }
 
+    // For manual payment methods, don't create a Stripe Payment Intent
+    if (manualPaymentMethods.includes(selectedMethod)) {
+      setIsManualPayment(true);
+      setClientSecret(null);
+      setStatus('idle');
+      return;
+    }
+
+    setIsManualPayment(false);
     setStatus('loading');
     fetch('/api/payment-intent', {
       method: 'POST',
