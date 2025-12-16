@@ -202,12 +202,14 @@ export default function HeaderNavigation() {
                             <span className="text-[14px] font-normal">Notifications</span>
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/logout" className="flex items-center px-5 py-3 text-[#2C3E50] hover:bg-gray-50 transition-colors">
-                            <LogOut className="w-5 h-5 mr-4 text-gray-400" />
-                            <span className="text-[14px] font-normal">Logout</span>
-                        </Link>
-                    </li>
+                      {user && (
+                        <li>
+                            <button onClick={handleLogout} className="w-full flex items-center px-5 py-3 text-[#2C3E50] hover:bg-gray-50 transition-colors">
+                                <LogOut className="w-5 h-5 mr-4 text-gray-400" />
+                                <span className="text-[14px] font-normal">Logout</span>
+                            </button>
+                        </li>
+                      )}
                 </ul>
             </nav>
 
