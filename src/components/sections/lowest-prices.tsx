@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function LowestPricesSection() {
   const products = [
     {
@@ -8,7 +10,7 @@ export default function LowestPricesSection() {
       discount: 29,
       rating: 5.0,
       reviews: 2,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg", // Placeholder
+      image: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400&q=80",
       type: "speaker",
     },
     {
@@ -19,7 +21,7 @@ export default function LowestPricesSection() {
       discount: 49,
       rating: 4.8,
       reviews: 8,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&q=80",
       type: "speaker",
     },
     {
@@ -30,7 +32,7 @@ export default function LowestPricesSection() {
       discount: 10,
       rating: 5.0,
       reviews: 1,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1592286927505-0b0b2b3f2b85?w=400&q=80",
       type: "phone",
     },
     {
@@ -41,7 +43,7 @@ export default function LowestPricesSection() {
       discount: 24,
       rating: 4.5,
       reviews: 12,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
       type: "headphone",
     },
     {
@@ -52,7 +54,7 @@ export default function LowestPricesSection() {
       discount: 54,
       rating: 4.9,
       reviews: 24,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
       type: "smartwatch",
     },
     {
@@ -63,7 +65,7 @@ export default function LowestPricesSection() {
       discount: 28,
       rating: 4.9,
       reviews: 156,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&q=80",
       type: "headphone",
     },
     {
@@ -74,7 +76,7 @@ export default function LowestPricesSection() {
       discount: 13,
       rating: 5.0,
       reviews: 4,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80",
       type: "tablet",
     },
     {
@@ -85,7 +87,7 @@ export default function LowestPricesSection() {
       discount: 23,
       rating: 4.7,
       reviews: 18,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=400&q=80",
       type: "tablet",
     },
     {
@@ -96,7 +98,7 @@ export default function LowestPricesSection() {
       discount: 16,
       rating: 4.8,
       reviews: 8,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&q=80",
       type: "phone",
     },
     {
@@ -107,13 +109,13 @@ export default function LowestPricesSection() {
       discount: 45,
       rating: 4.6,
       reviews: 32,
-      image: "https://static.priceoye.pk/images/placeholder-product-mobile.jpg",
+      image: "https://images.unsplash.com/photo-1508685096489-7aac291ba59e?w=400&q=80",
       type: "smartwatch",
     },
   ];
 
   return (
-    <section className="w-full bg-[#ffffff] py-8 sm:py-12">
+    <section className="w-full bg-[#ffffff] py-8 sm:py-12 animate-fadeInUp">
       <div className="container mx-auto px-4 md:px-6 max-w-[1248px]">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-6">
@@ -121,7 +123,7 @@ export default function LowestPricesSection() {
             <span className="text-[#F44336]">Lowest Prices</span>{" "}
             <span className="text-[#2C3E50]">of the Year</span>
           </h2>
-          <button className="hidden sm:block text-[14px] font-semibold text-[#1E88E5] bg-white border border-[#1E88E5] px-4 py-2 rounded-[4px] hover:bg-[#F0F7FF] transition-colors">
+          <button className="hidden sm:block text-[14px] font-semibold text-[#1E88E5] bg-white border border-[#1E88E5] px-4 py-2 rounded-[4px] hover:bg-[#F0F7FF] transition-all duration-300">
             View All
           </button>
         </div>
@@ -132,7 +134,7 @@ export default function LowestPricesSection() {
             {products.map((product) => (
               <div
                 key={product.id}
-                className="group relative flex-none w-[160px] xs:w-[180px] sm:w-[220px] md:w-auto snap-start bg-white border border-[#E8E8E8] rounded-[8px] p-3 hover:shadow-lg transition-shadow duration-200"
+                className="group relative flex-none w-[160px] xs:w-[180px] sm:w-[220px] md:w-auto snap-start bg-white border border-[#E8E8E8] rounded-[8px] p-3 hover:shadow-xl hover:border-[#1E88E5]/20 transition-all duration-300"
               >
                 {/* Badges */}
                 <div className="absolute top-0 left-0 z-10 flex flex-col items-start gap-1 p-0">
@@ -150,24 +152,17 @@ export default function LowestPricesSection() {
 
                   {/* Product Image */}
                   <div className="relative w-full h-[140px] sm:h-[180px] mb-3 flex items-center justify-center bg-[#F9F9F9] rounded-[4px] overflow-hidden">
-                    {product.type === 'phone' ? (
-                      <img
-                        src={`https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop`}
-                        alt={product.title}
-                        loading="lazy"
-                        className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        loading="lazy"
-                        className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
-                      />
-                    )}
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 640px) 160px, (max-width: 768px) 220px, 200px"
+                      className="object-contain p-4 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
                   </div>
 
-                {/* Rating - Only visible if we assume standard card or if requested, often hidden on compact views but visible in screenshot */}
+                {/* Rating */}
                 <div className="flex items-center gap-1 mb-1.5">
                     <svg
                       className="w-3 h-3 text-[#FFC107] fill-current"
@@ -181,7 +176,7 @@ export default function LowestPricesSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[12px] sm:text-[14px] font-semibold text-[#2C3E50] leading-snug line-clamp-2 h-[34px] sm:h-[40px] mb-2">
+                <h3 className="text-[12px] sm:text-[14px] font-semibold text-[#2C3E50] leading-snug line-clamp-2 h-[34px] sm:h-[40px] mb-2 group-hover:text-[#1E88E5] transition-colors">
                   {product.title}
                 </h3>
 
@@ -207,7 +202,7 @@ export default function LowestPricesSection() {
           </div>
           
           <div className="mt-4 sm:hidden flex justify-center">
-            <button className="text-[13px] font-semibold text-[#1E88E5] border border-[#1E88E5] px-6 py-2 rounded-[4px] hover:bg-[#F0F7FF] w-full max-w-[200px]">
+            <button className="text-[13px] font-semibold text-[#1E88E5] border border-[#1E88E5] px-6 py-2 rounded-[4px] hover:bg-[#F0F7FF] w-full max-w-[200px] transition-all">
                 View All
             </button>
           </div>
