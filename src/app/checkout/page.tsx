@@ -336,6 +336,8 @@ export default function CheckoutPage() {
   const manualPaymentMethods: PaymentMethodType[] = ['easypaisa', 'jazzcash', 'bank_transfer', 'cod'];
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const params = new URLSearchParams(window.location.search);
     if (params.get('status') === 'success') {
       setStatus('success');
@@ -347,6 +349,9 @@ export default function CheckoutPage() {
       setStatus('error');
       return;
     }
+
+    // Clear previous error when changing methods
+    setErrorMessage('');
 
     // For manual payment methods, don't create a Stripe Payment Intent
     if (manualPaymentMethods.includes(selectedMethod)) {
@@ -366,6 +371,7 @@ export default function CheckoutPage() {
         currency: 'pkr',
         paymentMethod: selectedMethod 
       }),
+      signal: abortController.signal
     })
       .then((res) => res.json())
       .then((data) => {
@@ -377,10 +383,13 @@ export default function CheckoutPage() {
           setStatus('error');
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
         setErrorMessage('Failed to connect to payment server');
         setStatus('error');
       });
+
+    return () => abortController.abort();
   }, [amount, selectedMethod]);
 
   const handleSuccess = () => {
