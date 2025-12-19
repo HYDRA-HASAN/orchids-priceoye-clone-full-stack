@@ -1,9 +1,11 @@
+import Image from "next/image";
+
 export default function RecommendedProducts() {
   const products = [
     {
       id: 1,
       title: "Sovo Dynamo-X 22.5W 20000mAh Power Bank SPB-...",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1609091839311-d536819bc248?w=400&q=80",
       rating: "5.0",
       reviews: "4",
       price: "4,199",
@@ -16,7 +18,7 @@ export default function RecommendedProducts() {
     {
       id: 2,
       title: "Amazon Echo Buds",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80",
       rating: "4.8",
       reviews: "12",
       price: "23,899",
@@ -29,7 +31,7 @@ export default function RecommendedProducts() {
     {
       id: 3,
       title: "Oppo A3x",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=400&q=80",
       rating: "4.9",
       reviews: "30",
       price: "25,500",
@@ -42,7 +44,7 @@ export default function RecommendedProducts() {
     {
       id: 4,
       title: "Google Pixel Watch 2",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1508685096489-7aac291ba59e?w=400&q=80",
       rating: "5.0",
       reviews: "2",
       price: "78,299",
@@ -55,7 +57,7 @@ export default function RecommendedProducts() {
     {
       id: 5,
       title: "Airox E5 Wireless Earbuds",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400&q=80",
       rating: "4.7",
       reviews: "8",
       price: "2,599",
@@ -68,7 +70,7 @@ export default function RecommendedProducts() {
     {
       id: 6,
       title: "Airox PB10 Power Bank 27000mAh",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1625517431475-49d97d75605f?w=400&q=80",
       rating: "5.0",
       reviews: "5",
       price: "4,699",
@@ -81,7 +83,7 @@ export default function RecommendedProducts() {
     {
       id: 7,
       title: "Zero Caliber Pro All-Metal Appearance",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
       rating: "4.8",
       reviews: "8",
       price: "6,999",
@@ -94,7 +96,7 @@ export default function RecommendedProducts() {
     {
       id: 8,
       title: "Itel City 100",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=400&q=80",
       rating: "4.5",
       reviews: "19",
       price: "23,999",
@@ -107,7 +109,7 @@ export default function RecommendedProducts() {
     {
       id: 9,
       title: "Nothing Buds Pro 2",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1631867675167-90a456a9099d?w=400&q=80",
       rating: "4.9",
       reviews: "25",
       price: "16,499",
@@ -120,7 +122,7 @@ export default function RecommendedProducts() {
     {
       id: 10,
       title: "Oneplus Bullets Wireless Z2 Neckband",
-      image: "placeholder",
+      image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&q=80",
       rating: "5.0",
       reviews: "156",
       price: "6,799",
@@ -133,7 +135,7 @@ export default function RecommendedProducts() {
   ];
 
   return (
-    <section className="bg-white py-8 w-full">
+    <section className="bg-white py-8 w-full animate-fadeIn">
       <div className="container mx-auto px-4 md:px-6 max-w-[1248px]">
         <h2 className="text-[20px] md:text-[22px] font-semibold text-[#2C3E50] mb-6 text-left">
           Recommended Products
@@ -143,7 +145,7 @@ export default function RecommendedProducts() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="group relative bg-white border border-[#E8E8E8] rounded-lg p-3 hover:shadow-[0px_4px_12px_rgba(0,0,0,0.15)] transition-shadow duration-200 cursor-pointer flex flex-col h-full"
+              className="group relative bg-white border border-[#E8E8E8] rounded-lg p-3 hover:shadow-xl hover:border-[#1E88E5]/20 transition-all duration-300 cursor-pointer flex flex-col h-full"
             >
               {/* Badges */}
               <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
@@ -178,20 +180,16 @@ export default function RecommendedProducts() {
                 </div>
               )}
 
-                {/* Product Image Placeholder */}
-                <div className="w-full aspect-square bg-[#F9F9F9] rounded mb-3 flex items-center justify-center overflow-hidden">
-                  {product.category === 'Mobile' ? (
-                    <img
-                      src={`https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop`}
-                      alt={product.title}
-                      loading="lazy"
-                      className="w-full h-full object-contain mix-blend-multiply p-4 group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="text-gray-300">
-                      {getCategoryIcon(product.category)}
-                    </div>
-                  )}
+                {/* Product Image */}
+                <div className="relative w-full aspect-square bg-[#F9F9F9] rounded mb-3 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
+                    className="object-contain p-4 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
                 </div>
 
               {/* Content */}
@@ -209,7 +207,7 @@ export default function RecommendedProducts() {
                   </span>
                 </div>
 
-                <h3 className="text-[13px] md:text-[14px] font-semibold text-[#2C3E50] leading-[1.4] mb-2 line-clamp-2 min-h-[2.8em]">
+                <h3 className="text-[13px] md:text-[14px] font-semibold text-[#2C3E50] leading-[1.4] mb-2 line-clamp-2 min-h-[2.8em] group-hover:text-[#1E88E5] transition-colors">
                   {product.title}
                 </h3>
 
@@ -234,106 +232,11 @@ export default function RecommendedProducts() {
         </div>
         
         <div className="mt-8 flex justify-center">
-             <button className="px-6 py-2.5 text-[14px] font-semibold text-[#1E88E5] border border-[#1E88E5] rounded hover:bg-[#F0F7FF] transition-colors duration-200">
+             <button className="px-6 py-2.5 text-[14px] font-semibold text-[#1E88E5] border border-[#1E88E5] rounded hover:bg-[#F0F7FF] transition-all duration-300">
                 Load More
              </button>
         </div>
       </div>
     </section>
   );
-}
-
-function getCategoryIcon(category: string) {
-  switch (category) {
-    case 'Power Bank':
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="6" y="2" width="12" height="20" rx="2" />
-          <line x1="12" y1="18" x2="12" y2="18.01" />
-        </svg>
-      );
-    case 'Earbuds':
-    case 'Earphones':
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M3 14v-3a9 9 0 0 1 18 0v3" />
-          <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3v-7z" />
-          <path d="M18 14h3v7h-3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2z" />
-        </svg>
-      );
-    case 'Smart Watch':
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="6" y="6" width="12" height="12" rx="4" />
-          <path d="M9 2v4" />
-          <path d="M15 2v4" />
-          <path d="M9 18v4" />
-          <path d="M15 18v4" />
-          <circle cx="12" cy="12" r="2" />
-        </svg>
-      );
-    case 'Mobile':
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-          <line x1="12" y1="18" x2="12" y2="18" />
-        </svg>
-      );
-    default:
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-        </svg>
-      );
-  }
 }
