@@ -1,9 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+
 import HeaderNavigation from '@/components/sections/header-navigation';
 import HeroBanner from '@/components/sections/hero-banner';
 import CategoryCarousel from '@/components/sections/category-carousel';
-import BestSellerShowcase from '@/components/sections/best-seller-showcase';
+import BestSellerShowcase, { Product } from '@/components/sections/best-seller-showcase';
 import SaleCountdown from '@/components/sections/sale-countdown';
 import FeaturesBanner from '@/components/sections/features-banner';
 import ShopByBrand from '@/components/sections/shop-by-brand';
@@ -21,12 +24,23 @@ import YouMightAlsoLikeSection from '@/components/sections/you-might-also-like';
 import Footer from '@/components/sections/footer';
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase.from('products').select('*').eq('category', 'Mobile').limit(5);
+      if (error) console.error(error);
+      else setProducts(data || []);
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans">
       <HeaderNavigation />
       <HeroBanner />
       <CategoryCarousel />
-      <BestSellerShowcase />
+      <BestSellerShowcase products={products} />
       <SaleCountdown />
       <FeaturesBanner />
       <ShopByBrand />
