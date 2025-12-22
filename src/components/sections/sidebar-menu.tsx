@@ -1,8 +1,3 @@
-<file_path>
-src/components/sections/sidebar-menu.tsx
-</file_path>
-
-<content>
 'use client';
 
 import React, { useState } from 'react';
@@ -143,4 +138,3 @@ export default function SidebarMenu() {
     </div>
   );
 }
-</content>
