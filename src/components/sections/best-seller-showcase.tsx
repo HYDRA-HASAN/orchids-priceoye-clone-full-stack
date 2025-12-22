@@ -1,12 +1,3 @@
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  images: string[]; // use array for multiple images
-  category?: string;
-}
-
 'use client';
 
 import Image from "next/image";
