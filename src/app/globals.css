@@ -1,17 +1,3 @@
-/* Updated: 2025-12-22T19:09:53.947Z */
-/* Updated: 2025-12-19T17:15:47.249Z */
-/* Updated: 2025-12-18T18:39:39.886Z */
-/* Updated: 2025-12-18T16:11:13.937Z */
-/* Updated: 2025-12-18T08:00:01.099Z */
-/* Updated: 2025-12-17T15:51:02.427Z */
-/* Updated: 2025-12-16T23:15:54.321Z */
-/* Updated: 2025-12-16T21:05:32.789Z */
-/* Updated: 2025-12-15T09:57:16.385Z */
-/* Updated: 2025-12-14T18:08:16.178Z */
-/* Updated: 2025-12-14T14:42:20.009Z */
-/* Updated: 2025-12-13T13:02:25.876Z */
-/* Updated: 2025-12-13T12:23:39.169Z */
-/* Updated: 2025-12-13T08:50:24.335Z */
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -82,142 +68,142 @@
   --radius-md: 0.5rem; /* 8px */
   --radius-sm: 0.25rem; /* 4px */
 
-    --animate-accordion-down: accordion-down 0.2s ease-out;
-    --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 
-    @keyframes accordion-down {
-      from {
-        height: 0;
-      }
-      to {
-        height: var(--radix-accordion-content-height);
-      }
-    }
-    @keyframes accordion-up {
-      from {
-        height: var(--radix-accordion-content-height);
-      }
-      to {
-        height: 0;
-      }
-    }
-
-    /* Custom Transitions */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  @keyframes fadeInUp {
+  @keyframes accordion-down {
     from {
-      opacity: 0;
-      transform: translateY(20px);
+      height: 0;
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+      height: var(--radix-accordion-content-height);
     }
   }
-
-  @keyframes fadeIn {
+  @keyframes accordion-up {
     from {
-      opacity: 0;
+      height: var(--radix-accordion-content-height);
     }
     to {
-      opacity: 1;
+      height: 0;
     }
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+  /* Custom Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  @keyframes reveal {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  .animate-fadeInUp {
-    animation: fadeInUp 0.6s ease-out forwards;
+  to {
+    opacity: 1;
   }
+}
 
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-out forwards;
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
   }
-
-  .animate-slideInLeft {
-    animation: slideInLeft 0.6s ease-out forwards;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
 
-  .animate-slideInRight {
-    animation: slideInRight 0.6s ease-out forwards;
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
   }
-
-  .animate-scaleIn {
-    animation: scaleIn 0.5s ease-out forwards;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
 
-  .reveal {
-    animation: reveal 0.4s ease-out forwards;
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-
-  /* Utility classes for smoothness */
-  .smooth-transition {
-    transition: all var(--transition-normal);
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
+}
 
-  .hover-lift {
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-      border-color: var(--color-border);
-    }
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.reveal {
+  animation: reveal 0.4s ease-out forwards;
+}
+
+/* Utility classes for smoothness */
+.smooth-transition {
+  transition: all var(--transition-normal);
+}
+
+.hover-lift {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
+  }
 
   :root {
     --background: var(--color-background);
